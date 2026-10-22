@@ -80,7 +80,7 @@ vocR(x, c) = sum(k, NB / 2, band(2 * k + 1, x, c));   // bandas 2, 4, 6, 8
 //==================================================================
 process(l, r) = outL, outR
 with {
-    x    = l : fi.highpass(2, 40);                       // IN L = voz; IN R sin uso
+    x    = (l + r * 0.000001) : fi.highpass(2, 40);   // IN L = voz; IN R atenuada (solo para que el compilador la cuente como usada)
     exc  = x + (frz : si.smoo) * no.noise * NOISE;      // en freeze, el ruido sostiene las cuerdas
     c    = strings(exc);
 
